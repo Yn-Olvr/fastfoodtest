@@ -7,6 +7,11 @@ pipeline {
   maven 'M2_HOME'
 }
     stages {
+        stage('Checkout'){
+            steps{
+                git branch: 'main', url: 'https://github.com/Yn-Olvr/fastfoodtest.git'
+            }
+        }
         stage('Code Build') {
             steps {
                 sh 'mvn clean package'
