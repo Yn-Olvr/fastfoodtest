@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout'){
             steps{
-                git branch: 'main', url: 'https://github.com/Yn-Olvr/geolocation.git'
+                git branch: 'main', url: 'https://github.com/Yn-Olvr/fastfoodtest.git'
             }
         }
         stage('Code Build') {
