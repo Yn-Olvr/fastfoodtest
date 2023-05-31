@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('Checkout'){
             steps{
+                dir('./fastfood_BackEnd/')
                 git branch: 'main', url: 'https://github.com/Yn-Olvr/fastfoodtest.git'
             }
         }
