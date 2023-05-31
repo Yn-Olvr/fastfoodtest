@@ -9,17 +9,18 @@ pipeline {
     stages {
         stage('Checkout'){
             steps{
-                dir('./fastfood_BackEnd/')
                 git branch: 'main', url: 'https://github.com/Yn-Olvr/fastfoodtest.git'
             }
         }
         stage('Code Build') {
             steps {
+                dir('./fastfood_BackEnd/')
                 sh 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
+                dir('./fastfood_BackEnd/')
                 sh 'mvn test'
             }
        // stage("build & SonarQube analysis") {          
