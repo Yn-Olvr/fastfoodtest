@@ -7,30 +7,15 @@ pipeline {
   maven 'M2_HOME'
 }
     stages {
-        stage('Checkout'){
-            steps{
-                git branch: 'main', url: 'https://github.com/Yn-Olvr/fastfoodtest.git'
-            }
-        }
-        stage('Code Build') {
+
+        stage("build & SonarQube analysis") {          
             steps {
-                dir('./fastfood_BackEnd/')
-                sh 'mvn clean package'
+                dir('./fastfood_BackEnd/'){
+                    withSonarQubeEnv('SonarServer') {
+                        sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Hermann90_fastfoodtest'
+                        }
+                }
             }
-        }
-        stage('Test') {
-            steps {
-                dir('./fastfood_BackEnd/')
-                sh 'mvn test'
-            }
-       // stage("build & SonarQube analysis") {          
-           // steps {
-              //  dir('./fastfood_BackEnd/'){
-               //     withSonarQubeEnv('SonarServer') {
-                  //      sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Yn-Olvr_fastfoodtest'
-                      //  }
-               // }
-            //}
           }
     }
 }
