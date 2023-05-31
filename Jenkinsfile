@@ -7,15 +7,23 @@ pipeline {
   maven 'M2_HOME'
 }
     stages {
-
-        stage("build & SonarQube analysis") {          
+        stage('Code Build') {
             steps {
-                dir('./fastfood_BackEnd/'){
-                    withSonarQubeEnv('SonarServer') {
-                        sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Yn-Olvr_fastfoodtest'
-                        }
-                }
+                sh 'mvn clean package'
             }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+       // stage("build & SonarQube analysis") {          
+           // steps {
+              //  dir('./fastfood_BackEnd/'){
+               //     withSonarQubeEnv('SonarServer') {
+                  //      sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Yn-Olvr_fastfoodtest'
+                      //  }
+               // }
+            //}
           }
     }
 }
